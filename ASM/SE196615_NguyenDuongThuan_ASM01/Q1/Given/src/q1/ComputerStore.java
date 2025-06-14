@@ -37,14 +37,14 @@ class ItemList {
     void addLast(String name, int quantity, int price) {
         //You should write here appropriate statements to complete this function.
         //--------------------------------------------------------
-        Item item = new Item(name, quantity, price);
-        Node newNode = new Node(item);
-        if(this.isEmpty()){
-            head = tail = newNode;
-        }else{
-            tail.next = newNode;
-            tail = newNode;
+        Node newNode = new Node(new Item(name, quantity, price));
+        if (this.isEmpty()) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
         }
+        this.tail.next = newNode;
+        this.tail = newNode;
         //---------------------------------------------------------
     }
 
@@ -79,14 +79,14 @@ class RequestQueue {
     void enQueue(String name, int quantity) {
         //You should write here appropriate statements to complete this function.
         //--------------------------------------------------------
-        Item item = new Item(name, quantity);
-        Node newNode = new Node(item);
-        if(this.isEmpty()){
-            front = rear = newNode;
-        }else{
-            rear.next = newNode;
-            rear = newNode;
+        Node newNode = new Node(new Item(name, quantity));
+        if (this.isEmpty()) {
+            this.front = newNode;
+            this.rear = newNode;
+            return;
         }
+        this.rear.next = newNode;
+        this.rear = newNode;
         //---------------------------------------------------------
     }
 
@@ -94,11 +94,15 @@ class RequestQueue {
         Item tmp = new Item();
         //You should write here appropriate statements to complete this function.
         //--------------------------------------------------------
-        if(this.isEmpty()){
+        if (this.isEmpty()) {
             return null;
-        }else{
-            tmp = front.info;
-            this.front = this.front.next;   
+        }
+        tmp = this.front.info;
+        if (this.front.next == null) {
+            this.front = null;
+            this.rear = null;
+        } else {
+            this.front = this.front.next;
         }
         //---------------------------------------------------------
         return tmp;
@@ -149,24 +153,6 @@ class ComputerStore {
 //===========================================================================
 //=======YOU CAN EDIT OR EVEN ADD NEW FUNCTIONS IN THE FOLLOWING PART========
 //===========================================================================
-    int doRequest(){
-        Item request = RQueue.deQueue();
-        String itemName = request.getName();
-        int requestQty = request.getQuantity();
-        
-        Node current = IList.head;
-        while(current != null){
-            if(current.info.getName().equals(itemName)){
-                if(current.info.getQuantity() >= requestQty){
-                    current.info.setQuantity(current.info.getQuantity() - requestQty);
-                    return request.getQuantity() * current.info.getPrice();
-                }
-                break;
-            }
-            current = current.next;
-        }
-        return 0;
-    }
     void f1() throws Exception {
         load(1);
         String fname = "f1.txt";
@@ -193,10 +179,48 @@ class ComputerStore {
         /*You must keep statements pre-given in this function.
         Your task is to insert statements here, just after this comment,
         to complete the question in the exam paper.*/
-        doRequest();
+
+        //check RQueue Empty
+        if (RQueue.isEmpty()) {
+            return;
+        }
+        //get request item in RQueue
+        Item requestItem = RQueue.deQueue();
+        //update
+        updateItemInIList(requestItem);
         //------------------------------------------------------------------------------------
         ftraverse(f);
         f.close();
+    }
+
+    public boolean isAvailableQuantity(Node item, Item request) {
+        if (item.info.getQuantity() >= request.getQuantity()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void updateItemInIList(Item requestItem) {
+        //search item in IList and update quantity by first request item in RQueue
+        Node item = IList.head;
+        while (item != null) {
+            //if name of item not equal to request item, travel to next item in IList
+            if (!item.info.getName().equals(requestItem.getName())) {
+                item = item.next;
+                continue;
+            }
+            //name of item equal to request item => check quantity
+            if (isAvailableQuantity(item, requestItem)) {
+                //update quantity
+                int newQuantity = item.info.getQuantity() - requestItem.getQuantity();
+                item.info.setQuantity(newQuantity);
+                // if set quantity successfully => end loop
+                // must not use return beacause end function => not run ftraverse(f);f.close();
+                break;
+            }
+            //travel to next item in IList
+            item = item.next;
+        }
     }
 
     void f3() throws Exception {
@@ -212,8 +236,12 @@ class ComputerStore {
         /*You must keep statements pre-given in this function.
         Your task is to insert statements here, just after this comment,
         to complete the question in the exam paper.*/
-        while(!RQueue.isEmpty()){
-            doRequest();
+
+        while (!RQueue.isEmpty()) {
+            //get request item in RQueue
+            Item requestItem = RQueue.deQueue();
+            //update
+            updateItemInIList(requestItem);
         }
 
         //------------------------------------------------------------------------------------
@@ -235,12 +263,43 @@ class ComputerStore {
         /*You must keep statements pre-given in this function.
         Your task is to insert statements here, just after this comment,
         to complete the question in the exam paper.*/
-        while(!RQueue.isEmpty()){
-            S += doRequest();
-        }
+        
+        //caculate
+        S = calcuteTotalRevenue();
         //------------------------------------------------------------------------------------
         f.writeBytes("Money     : " + S + " ");
         f.close();
+    }
+
+    public int calcuteRevenueOfItem(Item requestItem) {
+        //search item in IList and calcute by quantity * price
+        Node item = IList.head;
+        while (item != null) {
+            //if name of item not equal to request item, travel to next item in IList
+            if (!item.info.getName().equals(requestItem.getName())) {
+                item = item.next;
+                continue;
+            }
+            //name of item equal to request item => check quantity
+            if (isAvailableQuantity(item, requestItem)) {
+                //calcute
+                return item.info.getPrice() * requestItem.getQuantity();
+            }
+            //travel to next item in IList
+            item = item.next;
+        }
+        return 0;
+    }
+    
+    public int calcuteTotalRevenue() {
+        int total = 0;
+        while (!RQueue.isEmpty()) {
+            //get request item in RQueue
+            Item requestItem = RQueue.deQueue();
+            //caculate
+            total += calcuteRevenueOfItem(requestItem);
+        }
+        return total;
     }
 
 }

@@ -27,7 +27,6 @@ public class BinaryTree {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         BinaryTree binaryTree = new BinaryTree();
         Node firstNode = new Node(1);
         binaryTree.root = firstNode;
@@ -80,6 +79,25 @@ public class BinaryTree {
         postOrder(root.left);
         postOrder(root.right);
         System.out.print(root.value + " ");
+    }
+
+    //level order traversal: visit nodes level by level
+    public static void levelOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+        java.util.Queue<Node> queue = new java.util.LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node current = queue.poll();
+            System.out.print(current.value + " ");
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+        }
     }
 
 }

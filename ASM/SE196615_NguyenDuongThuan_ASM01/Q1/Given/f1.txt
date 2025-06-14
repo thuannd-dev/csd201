@@ -1,0 +1,2 @@
+Data Item: (Computer,10,2000) (Keyboard,10,300) (Mouse,10,100) (Tablet,10,3000) (Phone,10,3000) (Monitor,10,2000) 
+Request   : (Computer,2) (Keyboard,5) (Tablet,3) (Monitor,12) (Mouse,2) 
