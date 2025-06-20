@@ -1,6 +1,0 @@
-Data for test:
- Computer      Keyboard       Mouse       Tablet       Phone       Monitor
- 10   10      10      10     10     10
- 2000  300   100     3000     3000   2000
- Computer      Keyboard       Tablet       Monitor       Mouse
- 2   5      3     12     2

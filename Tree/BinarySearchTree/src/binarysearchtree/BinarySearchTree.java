@@ -91,19 +91,62 @@ public class BinarySearchTree {
         return validateBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
+    public Node delete(int key, Node root) {
+        if (root == null) {//base case
+            return null;
+        }
+        if (key < root.value) {
+            root.left = delete(key, root.left);
+        } else if (key > root.value) {
+            root.right = delete(key, root.right);
+        } else {
+            // Node to be deleted found
+            if ((root.left == null) && (root.right == null)) {
+                return root.left;
+            }
+            if (root.left == null) {
+                return root.right;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+            // Node with two children: Get the inorder successor (smallest in the right subtree)
+            root.value = minValueNode(root.right);
+            root.right = delete(root.value, root.right);
+        }
+        return root;
+    }
+
+    private int minValueNode(Node root) {
+        Node current = root;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current.value;
+    }
+
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
+        bst.insert(34);
+        bst.insert(23);
         bst.insert(10);
-        bst.insert(5);
-        bst.insert(15);
-        bst.insert(3);
+        bst.insert(25);
+        bst.insert(26);
+        bst.insert(10);
         bst.insert(7);
+        bst.insert(15);
+        bst.insert(30);
+        bst.insert(40);
+        bst.insert(50);
+        bst.insert(60);
         bst.inorderTraversal();
         System.out.println("Searching for 7: " + bst.search(7)); // true
-        System.out.println("Searching for 20: " + bst.search(20)); // false}
+        System.out.println("Searching for 20: " + bst.search(20)); // false
         System.out.println("Is the tree a valid BST? " + bst.validateBST(bst.root, Integer.MIN_VALUE, Integer.MAX_VALUE)); // true
         bst.insert(10); // Duplicate, should not be inserted
         bst.inorderTraversal(); // Should not include duplicate 10  
         System.out.println(bst.validateBST()); // true
+        bst.delete(23, bst.root); // Delete node with value 23
+        bst.inorderTraversal(); // Should not include 23
     }
 }
