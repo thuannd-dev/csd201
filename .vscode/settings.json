@@ -1,0 +1,7 @@
+{
+  "java.project.sourcePaths": [
+    "Tree/MaxHeap/src",
+    "Tree/BinarySearchTree/src",
+    "MaxHeap/src/main/java/com/mycompany/maxheap"
+  ]
+}

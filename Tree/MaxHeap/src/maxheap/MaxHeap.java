@@ -10,14 +10,11 @@ package maxheap;
  */
 public class MaxHeap {
 
-    /**
-     * @param args the command line arguments
-     */
     private Integer[] heap;
-    private int size;// Current number of elements in the heap
+    private int size;
 
     public MaxHeap(int capacity) {
-        heap = new Integer[capacity + 1];// Index 0 is not used - null value
+        heap = new Integer[capacity + 1];
         size = 0;
     }
 
@@ -25,61 +22,110 @@ public class MaxHeap {
         return size == 0;
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
-    public void insert(int key) {
+    public void insert(int value) {
         if (size == heap.length - 1) {
-            this.resize(this.size * 2);
+            resize(heap.length * 2);
         }
         size++;
-        heap[size] = key;
+        heap[size] = value;
         swim(size);
     }
 
-    private void swim(int k) {
-        //k khác 1 và giá trị của con lớn hơn giá trị của cha thì hoán đổi
-        while (k > 1 && heap[k / 2] < heap[k]) {
-            swap(k / 2, k);
-            k /= 2;
+    public void resize(int newCapacity) {
+        Integer[] temp = new Integer[newCapacity];
+        for (int i = 0; i < heap.length; i++) {
+            temp[i] = heap[i];
+        }
+        heap = temp;
+    }
+
+    public void swim(int k) {
+        while (k > 1 && heap[k] > heap[k / 2]) {
+            swap(k, k / 2);
+            k = k / 2;
         }
     }
 
-    private void swap(int i, int j) {
+    public void swap(int i, int j) {
         int temp = heap[i];
         heap[i] = heap[j];
         heap[j] = temp;
-    }
-
-    private void resize(int newCapacity) {
-        Integer[] newHeap = new Integer[newCapacity + 1];
-        for (int i = 1; i <= size; i++) {
-            newHeap[i] = heap[i];
-        }
-        heap = newHeap;
     }
 
     public void printHeap() {
         for (int i = 1; i <= size; i++) {
             System.out.print(heap[i] + " ");
         }
-        System.out.println();
+        System.out.println("");
+    }
+
+    public int delete() {
+        if (size == 0) {
+            throw new RuntimeException("Heap is empty");
+        }
+        int max = heap[1];
+        swap(1, size);
+        size--;
+        heap[size + 1] = null;
+        sink(1);
+        return max;
+    }
+
+    public void sink(int k) {
+        while (2 * k <= size) { // has at least 1 child
+            // has 1 child
+            if (2 * k + 1 > size) {
+                if (heap[k] < heap[2 * k]) {
+                    swap(k, 2 * k);
+                    k = 2 * k;
+                } else {
+                    return;
+                }
+            }
+            if (heap[k] < heap[2 * k] || heap[k] < heap[2 * k + 1]) {
+                if (heap[2 * k] > heap[2 * k + 1]) {
+                    swap(k, 2 * k);
+                    k = 2 * k;
+                } else {
+                    swap(k, 2 * k + 1);
+                    k = 2 * k + 1;
+                }
+            } else {
+                return;
+            }
+        }
+    }
+
+    public int getMax() {
+        return heap[1];
     }
 
     public static void main(String[] args) {
-        MaxHeap maxHeap = new MaxHeap(5);
-        maxHeap.insert(10);
-        maxHeap.insert(20);
-        maxHeap.insert(5);
-        maxHeap.insert(30);
-        maxHeap.insert(15);
-        maxHeap.insert(25);
-        maxHeap.insert(35);
-        System.out.println("Size of heap: " + maxHeap.getSize());
-        System.out.println("Is heap empty? " + maxHeap.isEmpty());
-        maxHeap.printHeap();
+        MaxHeap myHeap = new MaxHeap(5);
+        myHeap.insert(5);
+        myHeap.insert(10);
+        myHeap.insert(24);
+        myHeap.insert(25);
+        myHeap.insert(10);
+        myHeap.insert(12);
+        myHeap.insert(14);
+        myHeap.insert(22);
+        myHeap.printHeap();
+
+        System.out.println(myHeap.delete());
+        myHeap.printHeap();
+        System.out.println(myHeap.delete());
+        myHeap.printHeap();
+        System.out.println(myHeap.delete());
+        myHeap.printHeap();
+        System.out.println(myHeap.delete());
+        myHeap.printHeap();
+
+        System.out.println("Maximum number: " + myHeap.getMax());
 
     }
-
 }
