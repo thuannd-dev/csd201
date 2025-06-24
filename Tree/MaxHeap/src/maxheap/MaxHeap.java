@@ -86,6 +86,7 @@ public class MaxHeap {
                     return;
                 }
             }
+            // has 2 child
             if (heap[k] < heap[2 * k] || heap[k] < heap[2 * k + 1]) {
                 if (heap[2 * k] > heap[2 * k + 1]) {
                     swap(k, 2 * k);
