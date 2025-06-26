@@ -2,6 +2,7 @@
   "java.project.sourcePaths": [
     "Tree/MaxHeap/src",
     "Tree/BinarySearchTree/src",
-    "MaxHeap/src/main/java/com/mycompany/maxheap"
+    "Algorithms/SortAlgorithms/src/sortalgorithms",
+    "Algorithms/SortAlgorithms/src/sortalgorithm"
   ]
 }

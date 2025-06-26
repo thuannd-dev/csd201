@@ -1,0 +1,8 @@
+Data for test:
+ Computer     Tablet      Keyboard       Tablet       Tablet       Phone       Tablet
+ A    B   C     D      E   F  G
+ 2000  4000   100     3000     3000   2000    3000 
+Search:
+Computer
+Delete:
+Tablet
