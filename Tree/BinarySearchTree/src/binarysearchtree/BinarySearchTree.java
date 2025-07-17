@@ -110,7 +110,8 @@ public class BinarySearchTree {
             if (root.right == null) {
                 return root.left;
             }
-            // Node with two children: Get the inorder successor (smallest in the right subtree)
+            // Node with two children: find inorder successor- Người kế nhiệm- thay thế
+            //Smallest in the Right subtree
             root.value = minValueNode(root.right);
             root.right = delete(root.value, root.right);
         }
@@ -128,6 +129,7 @@ public class BinarySearchTree {
     public static void main(String[] args) {
         BinarySearchTree bst = new BinarySearchTree();
         bst.insert(34);
+        bst.insert(23);
         bst.insert(23);
         bst.insert(10);
         bst.insert(25);
@@ -150,3 +152,86 @@ public class BinarySearchTree {
         bst.inorderTraversal(); // Should not include 23
     }
 }
+
+
+/*
+ 
+class Node {
+    int data;
+    Node left, right;
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+
+public class GfG{
+
+    int findDepth(Node root, int x) {
+        
+        // Base case
+        if (root == null)
+            return -1;
+
+        // Initialize distance as -1
+        int dist = -1;
+
+        // Check if x is current node
+        if ((root.data == x)
+            || (dist = findDepth(root.left, x)) >= 0
+            || (dist = findDepth(root.right, x)) >= 0)
+            // Return depth of the node
+            return dist + 1;
+
+        return dist;
+    }
+
+    int findHeightUtil(Node root, int x, int[] height) {
+        // Base Case
+        if (root == null) {
+            return -1;
+        }
+
+        // Store the maximum height of the left and right subtree
+        int leftHeight = findHeightUtil(root.left, x, height);
+        int rightHeight = findHeightUtil(root.right, x, height);
+
+        // Update height of the current node
+        int ans = Math.max(leftHeight, rightHeight) + 1;
+
+        // If current node is the required node
+        if (root.data == x)
+            height[0] = ans;
+
+        return ans;
+    }
+
+    int findHeight(Node root, int x) {
+        // Store the height of the given node
+        int[] h = {-1};
+
+        // Stores height of the Tree
+        findHeightUtil(root, x, h);
+
+        // Return the height
+        return h[0];
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node(5);
+        root.left = new Node(10);
+        root.right = new Node(15);
+        root.left.left = new Node(20);
+        root.left.right = new Node(25);
+        root.left.right.right = new Node(45);
+        root.right.left = new Node(30);
+        root.right.right = new Node(35);
+
+        int k = 25;
+
+        GfG tree = new GfG();
+        System.out.println("Depth: " + tree.findDepth(root, k));
+        System.out.println("Height: " + tree.findHeight(root, k));
+    }
+}
+ */

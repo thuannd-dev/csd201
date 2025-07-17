@@ -144,6 +144,9 @@ public class LinkedList {
     public static void main(String[] args) {
         LinkedList sll = new LinkedList();
         sll.insertAtBegin(10);
+        sll.insertAtBegin(20);
+        sll.insertAtBegin(30);
+        sll.insertAtBegin(40);
         // sll.insertAtBegin(20);
         // sll.insertAtBegin(30);
         // sll.insertAtEnd(40);
@@ -152,7 +155,7 @@ public class LinkedList {
         // System.out.println(sll.search(20)); // Output: 2
         // sll.deleteAtEnd();
         // sll.traversal();
-        sll.deleteAtPosition(0);
+        sll.deleteAtPosition(1);
         sll.traversal();
 
     }

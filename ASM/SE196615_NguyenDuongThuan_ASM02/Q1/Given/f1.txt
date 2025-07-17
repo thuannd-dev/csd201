@@ -1,0 +1,2 @@
+Order Queue: (Computer,A,2000.0) (Tablet,B,300.0) (Keyboard,C,100.0) (Mouse,D,3000.0) (Tablet,E,3000.0) (Phone,F,2000.0) (Monitor,G,3000.0) 
+Order BST: (Computer,A,2000.0) (Keyboard,C,100.0) (Monitor,G,3000.0) (Mouse,D,3000.0) (Phone,F,2000.0) (Tablet,B,300.0) (Tablet,E,3000.0) 

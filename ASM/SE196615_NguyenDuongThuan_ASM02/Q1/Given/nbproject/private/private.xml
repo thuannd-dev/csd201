@@ -2,9 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Linh/Documents/NetBeansProjects/CSD201/ASM2/ASM2_01/Q1/Given/src/q1/ComputerStore.java</file>
-        </group>
         <group name="CSD201"/>
         <group name="CSDAssign">
             <file>file:/C:/Users/Legion%205%20Pro/Documents/FPT/CSD201%20-%20Data%20structures%20and%20Algorithm%20(Java)/Assignments/ASM02/ASM2_01_Sol/SE180351_TranVanAnh_ASM01/Q1/Given/src/q1/Q1.java</file>
@@ -15,6 +12,12 @@
             <file>file:/C:/Users/Legion%205%20Pro/Documents/FPT/CSD201%20-%20Data%20structures%20and%20Algorithm%20(Java)/Assignments/ASM02/ASM2_01_Sol/SE180351_TranVanAnh_ASM01/Q1/Given/src/q1/Lib.java</file>
             <file>file:/C:/Users/Legion%205%20Pro/Documents/FPT/CSD201%20-%20Data%20structures%20and%20Algorithm%20(Java)/Assignments/ASM02/ASM2_01_Sol/SE180351_TranVanAnh_ASM01/Q1/Given/src/q1/ComputerStore.java</file>
             <file>file:/C:/Users/Legion%205%20Pro/Documents/FPT/CSD201%20-%20Data%20structures%20and%20Algorithm%20(Java)/Assignments/ASM02/ASM2_01_Sol/SE180351_TranVanAnh_ASM01/Q1/Given/src/q1/Order.java</file>
+        </group>
+        <group>
+            <file>file:/D:/Semester3/CSD201/ASM/SE196615_NguyenDuongThuan_ASM02/Q1/Given/src/q1/OrderBST.java</file>
+            <file>file:/D:/Semester3/CSD201/ASM/SE196615_NguyenDuongThuan_ASM02/Q1/Given/src/q1/ComputerStore.java</file>
+            <file>file:/D:/Semester3/CSD201/ASM/SE196615_NguyenDuongThuan_ASM02/Q1/Given/src/q1/Q1.java</file>
+            <file>file:/D:/Semester3/CSD201/ASM/SE196615_NguyenDuongThuan_ASM02/Q1/Given/src/q1/OrderQueue.java</file>
         </group>
     </open-files>
 </project-private>

@@ -41,6 +41,17 @@ public class OrderQueue {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(isEmpty()) {
+            front = new Node(new Order(orderID, customerName, totalPrice));
+            length++;
+            return;
+        }
+        Node current = front;
+        while(current.next != null) {
+            current = current.next;
+        }
+        current.next = new Node(new Order(orderID, customerName, totalPrice));
+        length++;
     }
     
     public void remove(String id){
@@ -48,6 +59,19 @@ public class OrderQueue {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(id == null) return;
+        if(isEmpty()) return;
+        if (front.info.orderID.compareTo(id) == 0) {
+            front = front.next;
+            return;
+        }
+        Node current = front;
+        while(current.next != null && current.next.info.orderID.compareTo(id) != 0) {
+            current = current.next;
+        }
+        if (current.next != null) {
+            current.next = current.next.next;
+        }
     }
     
     public void displayOrders(){

@@ -133,6 +133,9 @@ class ComputerStore {
         /*You must keep statements pre-given in this function.
         Your task is to insert statements here, just after this comment,
         to complete the question in the exam paper.*/
+        orderTree.remove(deleteID);
+        orderQueue.remove(deleteID);
+        
         
         //------------------------------------------------------------------------------------
         ftraverse(f);

@@ -32,10 +32,19 @@ public class OrderBST {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(root == null) {
+            return new TreeNode(order);
+        }
+        if (order.orderID.compareTo(root.info.orderID) < 0) {
+            root.left = insert(root.left, order);
+        }else if(order.orderID.compareTo(root.info.orderID) >= 0) {
+            root.right = insert(root.right, order);
+        }
+        return root;
     }
     
     public Order search(String id){
-        return search(root, id);
+        return search(root, id);    
     }
     
     public Order search(TreeNode root, String id){
@@ -43,6 +52,16 @@ public class OrderBST {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(root == null) {
+            return null;
+        }
+        if(id.compareTo(root.info.orderID) < 0) {
+            return search(root.left, id);
+        }else if (id.compareTo(root.info.orderID) > 0) {
+            return search(root.right, id);
+        }else {
+            return root.info;
+        }
     }
     
     public void remove(String id){
@@ -54,9 +73,47 @@ public class OrderBST {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(root == null) {
+            return null;
+        }
+        if(id.compareTo(root.info.orderID) < 0) {
+            root.left = remove(root.left, id);
+        }else if (id.compareTo(root.info.orderID) > 0) {
+            root.right = remove(root.right, id);
+        }else {
+            if ((root.left == null) && (root.right == null)) {
+                return null;
+            }
+            if (root.left == null) {
+                return root.right;
+            }
+            if (root.right == null) {
+                return root.left;
+            }
+            //two child
+            root.info = findMin(root.right);
+            root.right = remove(root.right, root.info.orderID);  
+        }
+        return root;
     }
     
-    public Order findMax(){
+    
+    public Order findMin(TreeNode root){
+        //You should write here appropriate statements to complete this function.
+        //--------------------------------------------------------
+        
+        //---------------------------------------------------------
+        if(root == null) {
+            return null;
+        }
+        TreeNode current = root;
+        while (current.left != null) {            
+            current = current.left;
+        }
+        return current.info;
+    }
+    
+    public Order findMax(){ 
         return findMax(root);
     }
     
@@ -65,5 +122,13 @@ public class OrderBST {
         //--------------------------------------------------------
         
         //---------------------------------------------------------
+        if(root == null) {
+            return null;
+        }
+        TreeNode current = root;
+        while (current.right != null) {            
+            current = current.right;
+        }
+        return current.info;
     }
 }
