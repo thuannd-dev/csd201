@@ -235,9 +235,6 @@ public class BSTree {
 
         // If the node has no left or right child, 
         // it is a leaf
-        if (root.left == null && root.right == null) {
-            return 1;
-        }
 
         // Recursively count the leaves in the 
         // left and right subtrees

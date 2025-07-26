@@ -141,16 +141,31 @@ public class SortAlgorithms {
 
     }
 
+    static void fun(int n) {
+        if (n == 0) {
+            System.out.println("Hello");
+        } else {
+            for (int i = 1; i <= n; i++) {
+                System.out.print("$");
+
+            }
+            System.out.println();
+            fun(n - 1);
+
+        }
+    }
+
     public static void main(String[] args) {
-        int[] arr = {64, 34, 25, 12, 22, 11, 90};
-        System.out.println("Unsorted array");
-        printArray(arr);
-        System.out.println();
-        // selectionSort(arr);
-        // mergeSort(arr, 0, arr.length - 1);
-        quickSort(arr, 0, arr.length - 1);
-        System.out.println("Sorted array");
-        printArray(arr);
+//        int[] arr = {64, 34, 25, 12, 22, 11, 90};
+//        System.out.println("Unsorted array");
+//        printArray(arr);
+//        System.out.println();
+//        // selectionSort(arr);
+//        // mergeSort(arr, 0, arr.length - 1);
+//        quickSort(arr, 0, arr.length - 1);
+//        System.out.println("Sorted array");
+//        printArray(arr);
+        fun(3);
     }
 
 }
